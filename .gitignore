@@ -1,0 +1,6 @@
+build
+public
+node_modules
+.DS_Store
+bundle.js
+.env
