@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { PartsSearch, TestControls } from "./components";
 
 const headers = {
   "x-requested-with": "XMLHttpRequest",
@@ -12,7 +11,38 @@ const localReq = axios.create({
   headers
 });
 
-class App extends Component {
+const style = {
+  select: {
+    border: "solid orange 1px",
+    margin: "3rem",
+    fontSize: "1rem",
+    width: "25%"
+  },
+  reqOption: {
+    border: "solid orange 1px",
+    margin: "3rem",
+    fontSize: "1rem"
+  },
+  year: {
+    margin: "1rem",
+    fontSize: "1rem",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center"
+  },
+  container: {
+    border: "solid blue 2px"
+  },
+  title: {
+    border: "solid blue",
+    width: "50%",
+    height: "60rem",
+    display: "flex",
+    justifyContent: "center"
+  }
+};
+
+class TestControlComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +86,7 @@ class App extends Component {
     return (
       <select onChange={handleChange}>
         {list.map(i => (
-          <option key={i} value={i}>
+          <option style={style.reqOption} key={i} value={i}>
             {i}
           </option>
         ))}
@@ -74,19 +104,13 @@ class App extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          margin: "2rem",
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center"
-        }}
-      >
-        <PartsSearch looking={false} />
-        <TestControls />
+      <div className="container-fluid" style={style.title}>
+        <div className="row">
+          <div className="paragraph">Results/Errors</div>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export const TestControls = TestControlComponent;

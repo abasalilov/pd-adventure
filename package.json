@@ -2,6 +2,24 @@
   "name": "pd_tester",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start:server": "node server/index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "start": "npm-run-all --parallel dev:*",
+    "dev:client": "react-scripts start",
+    "dev:server": "node server/index.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "async": "0.9.0",
     "axios": "^0.18.0",
@@ -29,23 +47,5 @@
     "soap": "^0.25.0",
     "underscore": "^1.8.3",
     "xml2js": "*"
-  },
-  "scripts": {
-    "start:server": "node server/index.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "npm-run-all --parallel dev:*",
-    "dev:build-client": "react-scripts start",
-    "dev:build-server": "node server/index.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }
