@@ -5,15 +5,17 @@ import { submitSearch } from "../actions";
 class PartSearchComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      updateVin: false
+    };
+
     this.handleSelection = this.handleSelection.bind(this);
     this.handleInformUser = this.handleInformUser.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleToggleVinPut = this.handleToggleVinPut.bind(this);
   }
 
-  componentDidMount() {
-    console.log("props", this.props);
-  }
+  componentDidMount() {}
 
   handleSelection(name, e) {
     this.setState({ [name]: e.target.value });
@@ -26,11 +28,18 @@ class PartSearchComponent extends Component {
   handleSearchSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
+    const { searchTerm } = this.state;
 
-    if (typeof this.state.searchTerm !== "undefined") {
-      console.log("props", this.props);
-      console.log("state", this.state);
+    if (typeof searchTerm !== "undefined") {
+      const vin = this.state.vin ? this.state.vin : "JTMZK33V576008418";
+      this.props.makeSearchReq({ vin, searchTerm });
+    } else {
+      alert("Please enter a search term");
     }
+  }
+
+  handleToggleVinPut() {
+    this.setState({ updateVin: !this.state.updateVin });
   }
 
   render() {
@@ -109,10 +118,30 @@ class PartSearchComponent extends Component {
                   >
                     Start
                   </button>
-                  <div data-id="scan" className="btn-orange-link addMargin">
-                    <img src="./assets/img/icon-scan-sm.png" alt="" /> Scan a
+                  <div
+                    data-id="scan"
+                    className="btn-orange-link addMargin"
+                    onClick={this.handleToggleVinPut}
+                  >
+                    <img src="./assets/img/icon-scan-sm.png" alt="" /> Search a
                     different VIN
                   </div>
+                  {this.state.updateVin ? (
+                    <div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={e => this.handleSelection("vin", e)}
+                        id="part"
+                        name="part"
+                        value={this.state.vin}
+                        placeholder="Enter a Vin"
+                        required
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </form>
               </div>
             </div>

@@ -19,6 +19,7 @@ export default function(
       const successState = Object.assign({}, state);
       successState.result = true;
       successState.pending = false;
+      successState.parts = action.payload;
       return successState;
     case SEARCH_FAILED:
       const failedState = Object.assign({}, state);
