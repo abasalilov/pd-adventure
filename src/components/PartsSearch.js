@@ -1,14 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { submitSearch } from "../actions";
 
 class PartSearchComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.handleSelection = this.handleSelection.bind(this);
+    this.handleInformUser = this.handleInformUser.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("props", this.props);
   }
 
   handleSelection(name, e) {
     this.setState({ [name]: e.target.value });
+  }
+
+  handleInformUser() {
+    alert("No scanning on this platform, it's just there for mocking UI ;-)");
+  }
+
+  handleSearchSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (typeof this.state.searchTerm !== "undefined") {
+      console.log("props", this.props);
+      console.log("state", this.state);
+    }
   }
 
   render() {
@@ -45,6 +67,7 @@ class PartSearchComponent extends Component {
                   To search for parts, first scan vehicle VIN barcode
                 </div>
                 <button
+                  onClick={this.handleInformUser}
                   className="btn btn-lg btn-orange-fill text-center addMargin"
                   data-id="scan"
                 >
@@ -55,7 +78,7 @@ class PartSearchComponent extends Component {
             </div>
             <div className="row" data-id="vehicle-container">
               <div className="col-xs-12">
-                <div className={this.props.looking ? "lookup-msg" : "hide-msg"}>
+                <div className={this.props.pending ? "lookup-msg" : "hide-msg"}>
                   <i className="fa fa-spin fa-cog" />
                   Looking up vehicle information
                 </div>
@@ -81,7 +104,7 @@ class PartSearchComponent extends Component {
               <div className="col-xs-12">
                 <form data-id="start-search">
                   <button
-                    type="submit"
+                    onClick={e => this.handleSearchSubmit(e)}
                     className="btn btn-default btn-block btn-lg btn-orange-fill "
                   >
                     Start
@@ -100,4 +123,24 @@ class PartSearchComponent extends Component {
   }
 }
 
-export const PartsSearch = PartSearchComponent;
+const mapStateToProps = state => {
+  const {
+    search: { result, pending, parts }
+  } = state;
+  return {
+    result,
+    pending,
+    parts
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    makeSearchReq: searchTerm => dispatch(submitSearch(searchTerm))
+  };
+};
+
+export const PartsSearch = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PartSearchComponent);

@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "gmas-ui",
+      "script": "npm start",
+      "watch": true,
+      "NODE_ENV": "staging"
+    }
+  ]
+}

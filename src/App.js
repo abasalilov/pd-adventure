@@ -25,31 +25,31 @@ class App extends Component {
     this.handleSearchByVinClick = this.handleSearchByVinClick.bind(this);
   }
 
-  async componentDidMount() {
-    // const one = await localReq.post("http://localhost:3001/search/autozone", {
-    //   searchTerm: "OIL FILTER",
-    //   vin: "JTMZK33V576008418",
-    //   azCategory: "",
-    //   user: {
-    //     api: {
-    //       expires: "2019-12-23T01:54:06.216Z",
-    //       token:
-    //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YzFlZWFiZTM1ZGNlOTM4ZDM1NTc1ODEiLCJleHAiOjE1NzcwNjYwNDYyMTZ9.oBKZp6Snq0M09ahr7ES4BuddTgeaR3sUJ5FxygfubaM"
-    //     },
-    //     providers: ["autozone"],
-    //     autozone: { phone: "6023312706", pin: "764505" },
-    //     partsAuthority: {},
-    //     advanceAuto: {},
-    //     __v: 0,
-    //     password:
-    //       "$2b$10$IVbzwQO/Ma3iODdunVe/P.d275Wf0NKSQz887/YA3n.b4SSTDnO6K",
-    //     email: "alek@aleks.co",
-    //     name: "Aleks",
-    //     mode: "LIVE",
-    //     _id: "5c1eeabe35dce938d3557581"
-    //   }
-    // });
-    // console.log("one", one);
+  async handleSearch() {
+    const one = await localReq.post("http://localhost:3001/search/autozone", {
+      searchTerm: "OIL FILTER",
+      vin: "JTMZK33V576008418",
+      azCategory: "",
+      user: {
+        api: {
+          expires: "2019-12-23T01:54:06.216Z",
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YzFlZWFiZTM1ZGNlOTM4ZDM1NTc1ODEiLCJleHAiOjE1NzcwNjYwNDYyMTZ9.oBKZp6Snq0M09ahr7ES4BuddTgeaR3sUJ5FxygfubaM"
+        },
+        providers: ["autozone"],
+        autozone: { phone: "6023312706", pin: "764505" },
+        partsAuthority: {},
+        advanceAuto: {},
+        __v: 0,
+        password:
+          "$2b$10$IVbzwQO/Ma3iODdunVe/P.d275Wf0NKSQz887/YA3n.b4SSTDnO6K",
+        email: "alek@aleks.co",
+        name: "Aleks",
+        mode: "LIVE",
+        _id: "5c1eeabe35dce938d3557581"
+      }
+    });
+    console.log("one", one);
   }
 
   renderList(list, handleChange) {
@@ -82,7 +82,7 @@ class App extends Component {
           alignItems: "center"
         }}
       >
-        <PartsSearch looking={false} />
+        <PartsSearch />
         <TestControls />
       </div>
     );
