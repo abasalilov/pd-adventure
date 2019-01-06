@@ -128,4 +128,21 @@ router.post("/search/autozone", services.auth.restrict, function(
   );
 });
 
+router.get("/test", services.auth.restrict, function(req, res, next) {
+  var retObj = {
+    geometry: req.body.geometry
+      ? JSON.parse(req.body.geometry)
+      : { latitude: 0, longitude: 0 },
+    autozone: {
+      display: false,
+      categories: [],
+      parts: [],
+      location: {},
+      err: ""
+    }
+  };
+
+  res.send(retObj);
+});
+
 module.exports = router;

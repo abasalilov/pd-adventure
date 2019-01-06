@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "gmas-ui",
+      "name": "pd-test",
       "script": "npm start",
       "watch": true,
       "NODE_ENV": "staging"

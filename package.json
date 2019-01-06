@@ -8,8 +8,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start": "npm-run-all --parallel dev:*",
+    "deploy": "npm-run-all --parallel prod:*",
     "dev:client": "react-scripts start",
-    "dev:server": "node server/index.js"
+    "dev:server": "node server/index.js",
+    "prod:client": "react-scripts build",
+    "prod:server": "node server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
