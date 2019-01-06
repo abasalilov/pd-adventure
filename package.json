@@ -11,7 +11,7 @@
     "deploy": "npm-run-all --parallel prod:*",
     "dev:client": "react-scripts start",
     "dev:server": "node server/index.js",
-    "prod:client": "react-scripts build",
+    "prod:client": "serve -s build",
     "prod:server": "node server/index.js"
   },
   "eslintConfig": {
