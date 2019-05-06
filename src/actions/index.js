@@ -20,7 +20,6 @@ export const submitSearch = data => async (dispatch, getState, api) => {
   dispatch({
     type: SEARCH_SUBMIT
   });
-  console.log("data", data);
   const { searchTerm, vin } = data;
   const res = await localReq.post("http://localhost:3001/search/autozone", {
     searchTerm,
@@ -45,6 +44,7 @@ export const submitSearch = data => async (dispatch, getState, api) => {
     }
   });
 
+  console.log("res.status", res.data);
   if (res.status !== 201) {
     dispatch({
       type: SEARCH_SUCCESS,

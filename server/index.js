@@ -14,12 +14,11 @@ app.use(bodyParser.json({ limit: "1mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/", api);
-app.use(express.static(__dirname + "/build"));
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  console.log("~~~~~~~~~~~~~~~~~~~~~`err", err);
+  console.log("~~~~~~~~~~~~~~~~~~~~~res", res);
 
   res.status(err.status || 500);
   res.send({

@@ -44,18 +44,22 @@ const style = {
     justifyContent: "center"
   },
   container: {
-    border: "solid blue 2px"
+    border: "solid orange 2px"
   },
   title: {
-    border: "solid blue",
+    border: "solid orange",
     width: "50%",
     height: "60rem",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    overflow: "scroll"
   },
   spinner: {
     border: "solid red 3px",
     width: "30rem !important"
+  },
+  row_new: {
+    width: "50rem"
   }
 };
 
@@ -70,13 +74,11 @@ class TestControlComponent extends Component {
     };
   }
 
-  async componentDidMount() {}
-
   renderPartsList() {
-    return this.props.parts.map(part => {
-      console.log("part", part);
+    return this.props.parts.map((part, idx) => {
+      console.log("part", Object.keys(part));
       return (
-        <div>
+        <div key={idx}>
           <Part part={part} />
         </div>
       );
@@ -96,10 +98,9 @@ class TestControlComponent extends Component {
   }
 
   render() {
-    console.log("props", this.props);
     return (
       <div className="container-fluid" style={style.title}>
-        <div className="row">
+        <div style={style.row_new}>
           <div className="paragraph">Results/Errors</div>
           {this.props.pending && (
             <Spinner style={style.spinner} {...settings} />

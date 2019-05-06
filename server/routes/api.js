@@ -10,9 +10,6 @@ router.post("/search/autozone", services.auth.restrict, function(
   res,
   next
 ) {
-  console.log("req.body in /search/autozone", req.body);
-  console.log("req.user in /search/autozone", req.user);
-
   var retObj = {
     geometry: req.body.geometry
       ? JSON.parse(req.body.geometry)
@@ -30,7 +27,7 @@ router.post("/search/autozone", services.auth.restrict, function(
   async.series(
     [
       function(callback) {
-        console.log("async series 1", retObj);
+        // console.log("async series 1", retObj);
         if (!req.user.autozone.pin) return callback();
         if (req.body.azCategory) return callback();
 
@@ -51,7 +48,7 @@ router.post("/search/autozone", services.auth.restrict, function(
         });
       },
       function(callback) {
-        console.log("async series 2", retObj);
+        // console.log("async series 2", retObj);
 
         if (!req.user.autozone.pin) return callback();
         if (req.body.azCategory) return callback();
@@ -90,7 +87,7 @@ router.post("/search/autozone", services.auth.restrict, function(
           retObj.autozone.vehicle,
           req.user,
           function(err, parts, categories) {
-            //if (err) return callback(err);
+            if (err) return callback(err);
 
             retObj.autozone.err = err ? err.message || "Search Failed" : null;
             retObj.autozone.display =
@@ -103,8 +100,6 @@ router.post("/search/autozone", services.auth.restrict, function(
         );
       },
       function(callback) {
-        console.log("async series 4", retObj);
-
         if (!req.user.autozone.pin) return callback();
 
         retObj.autozone.location = { phoneNumber: req.user.autozone.phone };
@@ -122,7 +117,6 @@ router.post("/search/autozone", services.auth.restrict, function(
     ],
     function(err) {
       if (err) return next(err);
-
       res.send(retObj);
     }
   );

@@ -13,6 +13,7 @@ class PartSearchComponent extends Component {
     this.handleInformUser = this.handleInformUser.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleToggleVinPut = this.handleToggleVinPut.bind(this);
+    this.handleQuickSearch = this.handleQuickSearch.bind(this);
   }
 
   componentDidMount() {}
@@ -22,7 +23,7 @@ class PartSearchComponent extends Component {
   }
 
   handleInformUser() {
-    alert("No scanning on this platform, it's just there for mocking UI ;-)");
+    alert("No scanning on this platform, it's just there for testing APIs ;-)");
   }
 
   handleSearchSubmit(e) {
@@ -40,6 +41,13 @@ class PartSearchComponent extends Component {
 
   handleToggleVinPut() {
     this.setState({ updateVin: !this.state.updateVin });
+  }
+
+  handleQuickSearch(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const vin = this.state.vin ? this.state.vin : "JTMZK33V576008418";
+    this.props.makeSearchReq({ vin, searchTerm: "Brake Caliper - Front" });
   }
 
   render() {
@@ -73,7 +81,7 @@ class PartSearchComponent extends Component {
                   No vehicle chosen.
                 </div>
                 <div data-id="paragraph" className="paragraph">
-                  To search for parts, first scan vehicle VIN barcode
+                  To search for parts, first enter vehicle VIN
                 </div>
                 <button
                   onClick={this.handleInformUser}
@@ -142,6 +150,12 @@ class PartSearchComponent extends Component {
                   ) : (
                     ""
                   )}
+                  <button
+                    onClick={e => this.handleQuickSearch(e)}
+                    className="btn btn-default btn-block btn-lg btn-orange-fill "
+                  >
+                    Simple Search (predefined)
+                  </button>
                 </form>
               </div>
             </div>
