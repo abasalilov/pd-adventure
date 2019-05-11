@@ -1,164 +1,128 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { submitSearch } from "../actions";
+import Spinner from "react-easy-spinner";
+import { Part } from "./Part";
+import { AutoZone } from "./AutoZone";
+import { Napa } from "./Napa";
+import { withStyles } from "@material-ui/core/styles";
 
-class PartSearchComponent extends Component {
+const AZ = "AUTOZONE";
+const NAPA = "NAPA";
+
+const settings = {
+  shape: "cog",
+  animation: "spin",
+  time: "2s",
+  duration: "infinite",
+  opacity: "0.3",
+  position: "inherit",
+  elColor: "#e75b24"
+};
+
+const styles = theme => ({
+  select: {
+    border: "solid orange 1px",
+    margin: "3rem",
+    fontSize: "1rem",
+    width: "25%"
+  },
+  reqOption: {
+    border: "solid orange 1px",
+    margin: "3rem",
+    fontSize: "1rem"
+  },
+  year: {
+    margin: "1rem",
+    fontSize: "1rem",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center"
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  title: {
+    border: "solid orange",
+    width: "50%",
+    height: "60rem",
+    display: "flex",
+    justifyContent: "center",
+    overflow: "scroll"
+  },
+  spinner: {
+    border: "solid red 3px",
+    width: "30rem !important"
+  },
+  row_new: {
+    width: "50rem"
+  }
+});
+
+const overRideStyles = {
+  title: {
+    border: "solid orange",
+    width: "50%",
+    height: "60rem",
+    display: "flex",
+    justifyContent: "center",
+    overflow: "scroll"
+  }
+};
+
+class PartsSearchComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      updateVin: false
+      selection: null,
+      years: ["2019", "2018", "2017", "2016", "2015"],
+      makes: ["Ford", "Toyota", "Nissan", "Gir"],
+      models: ["2.0", "2.1", "2.2", "2.3"]
     };
-
-    this.handleSelection = this.handleSelection.bind(this);
-    this.handleInformUser = this.handleInformUser.bind(this);
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-    this.handleToggleVinPut = this.handleToggleVinPut.bind(this);
-    this.handleQuickSearch = this.handleQuickSearch.bind(this);
   }
 
-  componentDidMount() {}
-
-  handleSelection(name, e) {
-    this.setState({ [name]: e.target.value });
+  renderPartsList() {
+    return this.props.parts.map((part, idx) => {
+      console.log("part", Object.keys(part));
+      return (
+        <div key={idx}>
+          <Part part={part} />
+        </div>
+      );
+    });
   }
 
-  handleInformUser() {
-    alert("No scanning on this platform, it's just there for testing APIs ;-)");
-  }
-
-  handleSearchSubmit(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const { searchTerm } = this.state;
-
-    if (typeof searchTerm !== "undefined") {
-      const vin = this.state.vin ? this.state.vin : "JTMZK33V576008418";
-      this.props.makeSearchReq({ vin, searchTerm });
-    } else {
-      alert("Please enter a search term");
-    }
-  }
-
-  handleToggleVinPut() {
-    this.setState({ updateVin: !this.state.updateVin });
-  }
-
-  handleQuickSearch(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const vin = this.state.vin ? this.state.vin : "JTMZK33V576008418";
-    this.props.makeSearchReq({ vin, searchTerm: "Brake Caliper - Front" });
+  renderList(list, handleChange) {
+    const { classes } = this.props;
+    return (
+      <select onChange={handleChange}>
+        {list.map(i => (
+          <option className={classes.reqOption} key={i} value={i}>
+            {i}
+          </option>
+        ))}
+      </select>
+    );
   }
 
   render() {
+    const { option, classes } = this.props;
+    if (option === null) {
+      return null;
+    }
     return (
-      <div style={{ border: "solid orange 2px", height: "60rem" }}>
+      <div className={classes.container}>
         <div>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-xs-2" data-id="cancel">
-                <img
-                  data-id="cancel"
-                  alt="chevron"
-                  src="./assets/img/icon-chevron-down.png"
-                />
-              </div>
-              <div className="col-xs-8 text-center">Scan</div>
-            </div>
-          </div>
+          {option === AZ && <AutoZone />}
+          {option === NAPA && <AutoZone />}
         </div>
-        <div className="error-container">
-          <div className="msg" />
-        </div>
-        <div className="content-container">
-          <div className="container-fluid">
-            <div className="row" data-id="scan-container">
-              <div className="col-xs-12 text-center">
-                <div
-                  data-id="header"
-                  className={this.state.vehicle ? "vehicleOn" : "vehicleOff"}
-                >
-                  No vehicle chosen.
-                </div>
-                <div data-id="paragraph" className="paragraph">
-                  To search for parts, first enter vehicle VIN
-                </div>
-                <button
-                  onClick={this.handleInformUser}
-                  className="btn btn-lg btn-orange-fill text-center addMargin"
-                  data-id="scan"
-                >
-                  <img src="./assets/img/icon-scan-white.png" alt="" />
-                  <span>SCAN</span>
-                </button>
-              </div>
-            </div>
-            <div className="row" data-id="vehicle-container">
-              <div className="col-xs-12">
-                <div className={this.props.pending ? "lookup-msg" : "hide-msg"}>
-                  <i className="fa fa-spin fa-cog" />
-                  Looking up vehicle information
-                </div>
-                <div
-                  className="form-group addMargin"
-                  data-id="part-input-container"
-                >
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={e => this.handleSelection("searchTerm", e)}
-                    id="part"
-                    name="part"
-                    value={this.state.searchTerm}
-                    placeholder="Enter Part Name"
-                    required
-                  />
-                </div>
-                <div data-id="details" />
-              </div>
-            </div>
-            <div className="row" data-id="search-content">
-              <div className="col-xs-12">
-                <form data-id="start-search">
-                  <button
-                    onClick={e => this.handleSearchSubmit(e)}
-                    className="btn btn-default btn-block btn-lg btn-orange-fill "
-                  >
-                    Start
-                  </button>
-                  <div
-                    data-id="scan"
-                    className="btn-orange-link addMargin"
-                    onClick={this.handleToggleVinPut}
-                  >
-                    <img src="./assets/img/icon-scan-sm.png" alt="" /> Search a
-                    different VIN
-                  </div>
-                  {this.state.updateVin ? (
-                    <div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        onChange={e => this.handleSelection("vin", e)}
-                        id="part"
-                        name="part"
-                        value={this.state.vin}
-                        placeholder="Enter a Vin"
-                        required
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  <button
-                    onClick={e => this.handleQuickSearch(e)}
-                    className="btn btn-default btn-block btn-lg btn-orange-fill "
-                  >
-                    Simple Search (predefined)
-                  </button>
-                </form>
-              </div>
-            </div>
+        <div className="container-fluid" style={overRideStyles.title}>
+          <div className={classes.row_new}>
+            <div className="paragraph">Results/Errors</div>
+            {this.props.pending && (
+              <Spinner className={classes.spinner} {...settings} />
+            )}
+            {this.props.result && this.renderPartsList()}
           </div>
         </div>
       </div>
@@ -177,13 +141,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    makeSearchReq: searchTerm => dispatch(submitSearch(searchTerm))
-  };
-};
+export const StyledPartsSearch = withStyles(styles)(PartsSearchComponent);
 
 export const PartsSearch = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(PartSearchComponent);
+  null
+)(StyledPartsSearch);

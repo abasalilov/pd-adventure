@@ -76,7 +76,6 @@ class TestControlComponent extends Component {
 
   renderPartsList() {
     return this.props.parts.map((part, idx) => {
-      console.log("part", Object.keys(part));
       return (
         <div key={idx}>
           <Part part={part} />
