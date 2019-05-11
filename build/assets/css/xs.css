@@ -1345,3 +1345,92 @@ main .cart .checkout div.part-img-container img {
 .addMargin {
   margin: 2rem;
 }
+
+.btn-blue,
+.btn-blue:hover,
+.btn-blue:link,
+.btn-blue:visited,
+.btn-blue:focus {
+  background-color: #fff;
+  border-radius: 0;
+  border-color: #ffc62d;
+  box-shadow: none;
+  outline: none;
+  font-size: 21px;
+  font-weight: 600;
+  color: #ffc62d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-blue:active,
+.btn-blue.active {
+  background-color: #001489 !important;
+  border-color: #001489 !important;
+  color: #ffc62d;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-blue[disabled],
+.btn-blue[disabled]:hover {
+  background-color: #001489 !important;
+  border-color: #001489 !important;
+  color: #ffc62d;
+  box-shadow: none;
+  outline: none;
+  opacity: 1;
+}
+
+.btn-blue.sm {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.btn-blue-fill,
+.btn-blue-fill:hover,
+.btn-blue-fill:link,
+.btn-blue-fill:visited,
+.btn-blue-fill:focus {
+  background-color: #001489;
+  border-radius: 0;
+  border-color: #001489;
+  box-shadow: none;
+  outline: none;
+  font-size: 21px;
+  font-weight: 600;
+  color: #ffc62d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-blue-fill:active,
+.btn-blue-fill.active {
+  background-color: #a7a9ac !important;
+  border-color: #a7a9ac !important;
+  color: #ffc62d;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-blue-fill[disabled],
+.btn-blue-fill[disabled]:hover {
+  background-color: #a7a9ac !important;
+  border-color: #a7a9ac !important;
+  color: #ffc62d;
+  box-shadow: none;
+  outline: none;
+  opacity: 1;
+}
+
+.btn-blue-link {
+  text-align: center;
+  color: #001489;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.btn-blue-link:active {
+  color: #a7a9ac;
+}
