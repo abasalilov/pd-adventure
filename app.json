@@ -1,8 +1,14 @@
 {
   "apps": [
     {
-      "name": "pd-test",
-      "script": "npm run deploy",
+      "name": "pd-server",
+      "script": "npm run start:server",
+      "watch": true,
+      "NODE_ENV": "production"
+    },
+    {
+      "name": "pd-client",
+      "script": "npm run prod:server",
       "watch": true,
       "NODE_ENV": "production"
     }

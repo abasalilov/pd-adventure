@@ -4,13 +4,11 @@
   "private": true,
   "scripts": {
     "start": "npm run build",
-    "start:server": "node server/index.js",
     "build": "react-scripts build",
-    "postbuild": "run-p dev:*",
+    "postbuild": "run-p prod:*",
     "dev:client": "react-scripts start",
     "dev:server": "node server/index.js",
     "prod:client": "serve -s build",
-    "deploy": "npm-run-all --parallel prod:*",
     "prod:server": "node server/index.js"
   },
   "eslintConfig": {
