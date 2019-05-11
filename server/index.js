@@ -3,10 +3,8 @@ var debug = require("debug")("parts-detect");
 
 var express = require("express"),
   path = require("path"),
-  logger = require("morgan"),
   bodyParser = require("body-parser"),
   api = require("./routes/api"),
-  services = require("./services"),
   app = express();
 
 // view engine setup

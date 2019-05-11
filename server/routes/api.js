@@ -2,7 +2,6 @@ var express = require("express"),
   router = express.Router(),
   services = require("../services"),
   _ = require("underscore"),
-  parseString = require("xml2js").parseString,
   async = require("async");
 
 router.post("/search/autozone", services.auth.restrict, function(
@@ -151,17 +150,25 @@ router.post("/search/napa", services.auth.restrict, function(req, res, next) {
       vehicle: req.body.vehicle ? JSON.parse(req.body.vehicle) : {},
       location: {},
       err: ""
+    },
+    napa: {
+      display: false,
+      categories: [],
+      parts: [],
+      vehicle: req.body.vehicle ? JSON.parse(req.body.vehicle) : {},
+      location: {},
+      err: ""
     }
   };
-
+  console.log("here in napa");
   async.series(
     [
       function(callback) {
         // console.log("async series 1", retObj);
-        if (!req.user.autozone.pin) return callback();
-        if (req.body.azCategory) return callback();
+        // if (!req.user.autozone.pin) return callback();
+        // if (req.body.azCategory) return callback();
 
-        retObj.autozone.display = true;
+        // retObj.autozone.display = true;
 
         /********* ADDED FOR ENHANCED SEARCH ***************/
         if (retObj.autozone.vehicle.AaiaLegacyID) return callback();
