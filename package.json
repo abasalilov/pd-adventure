@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run build",
     "build": "react-scripts build",
-    "postbuild": "run-p prod:*",
-    "dev:client": "react-scripts start",
-    "dev:server": "node server/index.js",
+    "deploy": "npm-run-all --parallel prod:*",
+    "dev": "npm-run-all --parallel dev:*",
     "prod:client": "serve -s build",
-    "prod:server": "node server/index.js"
+    "prod:server": "node server/index.js",
+    "dev:client": "react-scripts start",
+    "dev:server": "node server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,7 +52,8 @@
     "shortid": "^2.2.2",
     "soap": "^0.25.0",
     "underscore": "^1.8.3",
-    "xml2js": "*"
+    "xml2js": "*",
+    "webpack": "^4.19.1"
   },
   "devDependencies": {}
 }
