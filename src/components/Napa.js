@@ -52,7 +52,7 @@ class NapaSearchComponent extends Component {
 
   render() {
     return (
-      <div style={{ border: "solid orange 2px", height: "60rem" }}>
+      <div style={{ border: "solid #001489 2px", height: "60rem" }}>
         <div>
           <div className="container-fluid">
             <div className="row">
@@ -63,7 +63,6 @@ class NapaSearchComponent extends Component {
                   src="./assets/img/icon-chevron-down.png"
                 />
               </div>
-              <div className="col-xs-8 text-center">Scan</div>
             </div>
           </div>
         </div>
@@ -83,14 +82,6 @@ class NapaSearchComponent extends Component {
                 <div data-id="paragraph" className="paragraph">
                   To search for parts, first enter vehicle VIN
                 </div>
-                <button
-                  onClick={this.handleInformUser}
-                  className="btn btn-lg btn-orange-fill text-center addMargin"
-                  data-id="scan"
-                >
-                  <img src="./assets/img/icon-scan-white.png" alt="" />
-                  <span>SCAN</span>
-                </button>
               </div>
             </div>
             <div className="row" data-id="vehicle-container">
@@ -122,17 +113,16 @@ class NapaSearchComponent extends Component {
                 <form data-id="start-search">
                   <button
                     onClick={e => this.handleSearchSubmit(e)}
-                    className="btn btn-default btn-block btn-lg btn-orange-fill "
+                    className="btn btn-default btn-block btn-lg btn-blue-fill "
                   >
                     Start
                   </button>
                   <div
                     data-id="scan"
-                    className="btn-orange-link addMargin"
+                    className="btn-blue-link addMargin"
                     onClick={this.handleToggleVinPut}
                   >
-                    <img src="./assets/img/icon-scan-sm.png" alt="" /> Search a
-                    different VIN
+                    Search a different VIN
                   </div>
                   {this.state.updateVin ? (
                     <div>
@@ -152,7 +142,7 @@ class NapaSearchComponent extends Component {
                   )}
                   <button
                     onClick={e => this.handleQuickSearch(e)}
-                    className="btn btn-default btn-block btn-lg btn-orange-fill "
+                    className="btn btn-default btn-block btn-lg btn-blue-fill "
                   >
                     Simple Search (predefined)
                   </button>

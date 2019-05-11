@@ -21,13 +21,16 @@ const settings = {
 
 const styles = theme => ({
   select: {
-    border: "solid orange 1px",
+    border: "solid #001489 1px",
     margin: "3rem",
     fontSize: "1rem",
     width: "25%"
   },
+  yellow: {
+    backgroundColor: "#FFC62D"
+  },
   reqOption: {
-    border: "solid orange 1px",
+    border: "solid #001489 1px",
     margin: "3rem",
     fontSize: "1rem"
   },
@@ -43,7 +46,7 @@ const styles = theme => ({
     flexDirection: "row"
   },
   title: {
-    border: "solid orange",
+    border: "solid #001489",
     width: "50%",
     height: "60rem",
     display: "flex",
@@ -61,7 +64,7 @@ const styles = theme => ({
 
 const overRideStyles = {
   title: {
-    border: "solid orange",
+    border: "solid #001489",
     width: "50%",
     height: "60rem",
     display: "flex",
@@ -114,7 +117,7 @@ class PartsSearchComponent extends Component {
       <div className={classes.container}>
         <div>
           {option === AZ && <AutoZone />}
-          {option === NAPA && <AutoZone />}
+          {option === NAPA && <Napa />}
         </div>
         <div className="container-fluid" style={overRideStyles.title}>
           <div className={classes.row_new}>
