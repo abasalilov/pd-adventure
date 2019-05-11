@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { submitSearch } from "../actions";
+import { submitNapaSearch } from "../actions";
 
 class NapaSearchComponent extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class NapaSearchComponent extends Component {
 
     if (typeof searchTerm !== "undefined") {
       const vin = this.state.vin ? this.state.vin : "JTMZK33V576008418";
-      this.props.makeSearchReq({ vin, searchTerm });
+      this.props.makeNapaSearchReq({ vin, searchTerm });
     } else {
       alert("Please enter a search term");
     }
@@ -47,7 +47,7 @@ class NapaSearchComponent extends Component {
     e.preventDefault();
     e.stopPropagation();
     const vin = this.state.vin ? this.state.vin : "JTMZK33V576008418";
-    this.props.makeSearchReq({ vin, searchTerm: "Brake Caliper - Front" });
+    this.props.makeNapaSearchReq({ vin, searchTerm: "Brake Caliper - Front" });
   }
 
   render() {
@@ -169,7 +169,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    makeSearchReq: searchTerm => dispatch(submitSearch(searchTerm))
+    makeNapaSearchReq: searchTerm => dispatch(submitNapaSearch(searchTerm))
   };
 };
 
